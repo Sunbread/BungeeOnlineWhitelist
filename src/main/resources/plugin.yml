@@ -1,0 +1,4 @@
+name: BungeeOnlineWhitelist
+main: top.sunbread.BungeeOnlineWhitelist.BungeeOnlineWhitelist
+version: ${version}
+author: Sunbread

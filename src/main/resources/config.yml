@@ -1,0 +1,7 @@
+whitelist-message: 'You are not whitelisted on this server!'
+mysql-host: localhost
+mysql-port: 3306
+mysql-database: database
+mysql-username: 'root'
+mysql-password: ''
+table-prefix: 'bow_'
