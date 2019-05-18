@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public final class BowDatabase {
 
-    private static final String TABLE_CREATE = "CREATE TABLE IF NOT EXISTS `{prefix}whitelist` (id INT AUTO_INCREMENT NOT NULL, uuid CHAR(32) NOT NULL UNIQUE, PRIMARY KEY (id)) DEFAULT CHARSET=utf8mb4";
+    private static final String TABLE_CREATE = "CREATE TABLE IF NOT EXISTS `{prefix}whitelist` (id BIGINT AUTO_INCREMENT NOT NULL, uuid CHAR(32) NOT NULL UNIQUE, PRIMARY KEY (id)) DEFAULT CHARSET=utf8mb4";
     private static final String UUID_SELECT = "SELECT id FROM `{prefix}whitelist` WHERE uuid=?";
     private static final String UUID_INSERT = "INSERT INTO `{prefix}whitelist` (uuid) VALUES (?)";
     private static final String UUID_DELETE = "DELETE FROM `{prefix}whitelist` WHERE uuid=?";
