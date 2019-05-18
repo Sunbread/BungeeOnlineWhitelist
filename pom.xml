@@ -7,7 +7,7 @@
     <groupId>top.sunbread</groupId>
     <artifactId>bungeeonlinewhitelist</artifactId>
     <name>BungeeOnlineWhitelist</name>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1</version>
     <packaging>jar</packaging>
 
     <properties>
