@@ -16,7 +16,8 @@ public final class BowDatabase {
     public BowDatabase(String host, int port, String database, String username, String password, String prefix)
             throws SQLException, ClassNotFoundException {
         Class.forName("com.mysql.jdbc.Driver");
-        connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database, username, password);
+        connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database + "?autoReconnect=true",
+                username, password);
         this.prefix = prefix;
         Statement statement = connection.createStatement();
         statement.executeUpdate(replacePrefix(TABLE_CREATE));
