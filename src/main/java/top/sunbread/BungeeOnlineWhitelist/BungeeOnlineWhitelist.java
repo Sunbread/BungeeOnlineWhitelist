@@ -47,10 +47,6 @@ public final class BungeeOnlineWhitelist extends Plugin {
         } catch (SQLException e) {
             getLogger().severe("Unable to connect to MySQL server. The plugin will not work.");
             return;
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            getLogger().severe("A fatal error occurred. The plugin will not work.");
-            return;
         }
         getProxy().getPluginManager().registerListener(this, new BowListener(getLogger(), config, database));
         getProxy().getPluginManager().registerCommand(this, new BowCommand(database));
