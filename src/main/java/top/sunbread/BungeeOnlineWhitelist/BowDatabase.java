@@ -26,6 +26,7 @@ public final class BowDatabase {
         config.setPassword(password);
         config.setConnectionTimeout(TimeUnit.SECONDS.toMillis(5));
         config.setInitializationFailTimeout(-1);
+        config.setPoolName("BungeeOnlineWhitelist-Hikari");
         ds = new HikariDataSource(config);
         this.prefix = prefix;
         Connection connection = ds.getConnection();
