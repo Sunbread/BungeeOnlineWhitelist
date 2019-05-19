@@ -5,6 +5,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 import java.sql.*;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 public final class BowDatabase {
 
@@ -23,6 +24,8 @@ public final class BowDatabase {
         config.setJdbcUrl("jdbc:mysql://" + host + ":" + port + "/" + database);
         config.setUsername(username);
         config.setPassword(password);
+        config.setConnectionTimeout(TimeUnit.SECONDS.toMillis(5));
+        config.setInitializationFailTimeout(-1);
         ds = new HikariDataSource(config);
         this.prefix = prefix;
         Connection connection = ds.getConnection();
