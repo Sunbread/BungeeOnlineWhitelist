@@ -29,10 +29,18 @@ public final class BowDatabase {
         config.setPoolName("BungeeOnlineWhitelist-Hikari");
         ds = new HikariDataSource(config);
         this.prefix = prefix;
-        Connection connection = ds.getConnection();
-        Statement statement = connection.createStatement();
-        statement.executeUpdate(replacePrefix(TABLE_CREATE));
-        connection.close();
+        try (Connection connection = ds.getConnection()) {
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(replacePrefix(TABLE_CREATE));
+        } catch (SQLException e) {
+            shutdown();
+            throw e;
+        }
+    }
+
+    public void shutdown() {
+        ds.close();
+        ds = null;
     }
 
     public boolean isInWhitelist(UUID uuid) throws SQLException {

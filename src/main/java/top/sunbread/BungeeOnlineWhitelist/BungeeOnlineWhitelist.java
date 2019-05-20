@@ -59,6 +59,7 @@ public final class BungeeOnlineWhitelist extends Plugin {
         getProxy().getPluginManager().unregisterListeners(this);
         getProxy().getPluginManager().unregisterCommands(this);
         config = null;
+        database.shutdown();
         database = null;
         loaded = false;
     }
