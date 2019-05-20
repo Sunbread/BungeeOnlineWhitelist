@@ -38,12 +38,12 @@ public final class BowDatabase {
         }
     }
 
-    public void shutdown() {
+    public synchronized void shutdown() {
         ds.close();
         ds = null;
     }
 
-    public boolean isInWhitelist(UUID uuid) throws SQLException {
+    public synchronized boolean isInWhitelist(UUID uuid) throws SQLException {
         try (Connection connection = ds.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(replacePrefix(UUID_SELECT));
             statement.setString(1, BowUtils.UUID2String(uuid));
@@ -55,7 +55,7 @@ public final class BowDatabase {
         }
     }
 
-    public boolean addWhitelist(UUID uuid) throws SQLException {
+    public synchronized boolean addWhitelist(UUID uuid) throws SQLException {
         try (Connection connection = ds.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(replacePrefix(UUID_INSERT));
             statement.setString(1, BowUtils.UUID2String(uuid));
@@ -65,7 +65,7 @@ public final class BowDatabase {
         }
     }
 
-    public boolean removeWhitelist(UUID uuid) throws SQLException {
+    public synchronized boolean removeWhitelist(UUID uuid) throws SQLException {
         try (Connection connection = ds.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(replacePrefix(UUID_DELETE));
             statement.setString(1, BowUtils.UUID2String(uuid));
