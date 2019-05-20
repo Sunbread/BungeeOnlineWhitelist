@@ -44,33 +44,35 @@ public final class BowDatabase {
     }
 
     public boolean isInWhitelist(UUID uuid) throws SQLException {
-        Connection connection = ds.getConnection();
-        PreparedStatement statement = connection.prepareStatement(replacePrefix(UUID_SELECT));
-        statement.setString(1, BowUtils.UUID2String(uuid));
-        ResultSet result = statement.executeQuery();
-        int count = 0;
-        while (result.next()) ++count;
-        result.close();
-        connection.close();
-        return count > 0;
+        try (Connection connection = ds.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(replacePrefix(UUID_SELECT));
+            statement.setString(1, BowUtils.UUID2String(uuid));
+            ResultSet result = statement.executeQuery();
+            int count = 0;
+            while (result.next()) ++count;
+            result.close();
+            return count > 0;
+        }
     }
 
     public boolean addWhitelist(UUID uuid) throws SQLException {
-        Connection connection = ds.getConnection();
-        PreparedStatement statement = connection.prepareStatement(replacePrefix(UUID_INSERT));
-        statement.setString(1, BowUtils.UUID2String(uuid));
-        int count = statement.executeUpdate();
-        connection.close();
-        return count > 0;
+        try (Connection connection = ds.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(replacePrefix(UUID_INSERT));
+            statement.setString(1, BowUtils.UUID2String(uuid));
+            int count = statement.executeUpdate();
+            connection.close();
+            return count > 0;
+        }
     }
 
     public boolean removeWhitelist(UUID uuid) throws SQLException {
-        Connection connection = ds.getConnection();
-        PreparedStatement statement = connection.prepareStatement(replacePrefix(UUID_DELETE));
-        statement.setString(1, BowUtils.UUID2String(uuid));
-        int count = statement.executeUpdate();
-        connection.close();
-        return count > 0;
+        try (Connection connection = ds.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(replacePrefix(UUID_DELETE));
+            statement.setString(1, BowUtils.UUID2String(uuid));
+            int count = statement.executeUpdate();
+            connection.close();
+            return count > 0;
+        }
     }
 
     private String replacePrefix(String string) {
